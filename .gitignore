@@ -1,25 +1,7 @@
-.tools/
-**/node_modules/
-**/__pycache__/
-.playwright-cli/
-output/
-update-v3/release-assets/
-update-v3/release-site/
-update-v4/release-assets/
-update-v4/release-site/
-security-build-artifacts/
-panel-ssl-tutorial-source.html
-**/release-manifest.json
-**/optimization-benchmark-results.json
-*.zip
-
-# Local environments, secrets, certificates and private authentication material
+# Local credentials and private keys
 .env
 .env.*
 !.env.example
-**/.env
-**/.env.*
-!**/.env.example
 *.pem
 *.key
 *.p12
@@ -27,43 +9,31 @@ panel-ssl-tutorial-source.html
 *.crt
 *.cer
 *.clixml
-**/id_rsa*
-**/id_ed25519*
-**/known_hosts
-**/credentials.json
-**/credentials.toml
-**/credentials.local.*
-**/secrets.json
-**/secrets.toml
+credentials.*
+secrets.*
 
-# Dependencies, generated releases and platform caches
-**/.venv/
-**/venv/
-**/.pytest_cache/
-**/.mypy_cache/
-**/*.pyc
-**/dist/
-**/build/
-site/assets/
-baota-site/assets/
-*.gz
-*.tar
-*.tgz
-*.7z
+# Dependencies, build output and local validation/archive
+node_modules/
+dist/
+.local/
+.tools/
+__pycache__/
+**/__pycache__/
+*.pyc
+.venv/
+venv/
+*.zip
 
-# Runtime data, backups, diagnostics and personal editor settings
-**/*.sqlite
-**/*.sqlite3
-**/*.sqlite3-*
-**/*.db
-**/*.db-*
-**/backups/
-**/*.log
-**/*.har
+# Persistent business data, backups, logs and personal editor settings
+data/
+backups/
+*.sqlite*
+*.db*
+*.log
+*.har
 .vscode/
 .idea/
 .codex/
-.local/
 *.code-workspace
 .DS_Store
 Thumbs.db

@@ -1,0 +1,30 @@
+[Unit]
+Description=Order management shared API
+After=network.target
+
+[Service]
+Type=simple
+User=peiliao
+Group=peiliao
+WorkingDirectory=/opt/order-management
+EnvironmentFile=/etc/order-management.env
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 /opt/order-management/backend/app.py --data /opt/order-management/data/peiliao.sqlite3
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+ReadWritePaths=/opt/order-management/data /opt/order-management/backups
+UMask=0077
+LimitNOFILE=4096
+TasksMax=64
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+[Unit]
+Description=Order management SQLite backup
+
+[Service]
+Type=oneshot
+User=peiliao
+Group=peiliao
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 /opt/order-management/backend/backup.py /opt/order-management/data/peiliao.sqlite3 /opt/order-management/backups
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_UNIX
+ReadWritePaths=/opt/order-management/data /opt/order-management/backups
+UMask=0077
+MemoryMax=256M
