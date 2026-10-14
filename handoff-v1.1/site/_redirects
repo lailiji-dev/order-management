@@ -1,0 +1,4 @@
+# Cloudflare Pages 边缘重定向规则
+# 站点入口文件为 peiliao.html（非默认 index.html），
+# 将根路径 / 重定向到 /peiliao.html，确保 https://peiliao.pages.dev/ 可直接打开应用。
+/ /peiliao.html 301

@@ -1,0 +1,10 @@
+# Cloudflare Pages 项目配置
+# 本项目的本质：单个静态 HTML 文件，无构建步骤、无后端。
+name = "peiliao"
+pages_build_output_dir = "site"
+compatibility_date = "2024-09-01"
+
+# 说明：
+# - pages_build_output_dir = "." 表示直接把当前目录作为站点根（即 peiliao.html）。
+# - 无需 build 命令（Cloudflare Pages 控制台里构建命令留空即可）。
+# - 部署命令：npx wrangler pages deploy . --project-name=peiliao --branch=main

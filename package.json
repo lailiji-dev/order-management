@@ -1,0 +1,33 @@
+{
+  "name": "peiliao",
+  "version": "4.0.0",
+  "private": true,
+  "description": "食品厂共享订单与配料系统，宝塔部署，Python API 与 SQLite 存储",
+  "scripts": {
+    "dev": "python update-v4/tests/qa-server.py --version v4 --release --port 43500",
+    "dev:cloudflare": "wrangler pages dev .",
+    "deploy": "pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/Deploy-SecuredWebsite.ps1",
+    "deploy:cloudflare": "node scripts/deploy.mjs",
+    "healthcheck": "node scripts/healthcheck.mjs",
+    "rollback": "node scripts/rollback.mjs",
+    "build:optimized": "python update-v3/tests/build-release.py",
+    "dev:optimized": "python update-v3/tests/qa-server.py --version v3 --port 43500",
+    "build:secured": "python update-v4/tests/build-release.py",
+    "test:api": "python update-v4/tests/api-test.py",
+    "test:security": "python update-v4/tests/security-api-test.py",
+    "test:frontend-security": "node update-v4/tests/frontend-security-test.mjs",
+    "test:ui": "node update-v4/tests/security-compat-frontend-ui-test.mjs",
+    "test:protocol": "node update-v4/tests/security-compat-frontend-protocol-test.mjs",
+    "test:review": "node update-v4/tests/security-compat-optimization-review-test.mjs",
+    "test:resources": "node update-v3/tests/frontend-resource-tools-test.mjs",
+    "test:connected": "node update-v4/tests/security-connected-test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^3.78.0",
+    "esbuild": "0.28.2",
+    "jsdom": "29.1.1"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生产配料计算系统</title>
+<link rel="icon" href="/favicon.svg?v=20261003-v3" type="image/svg+xml">
+<link rel="stylesheet" href="/app.css?v=20261003-v3">
+<script defer src="/shared.js?v=20261003-v3"></script>
+<script defer src="/app.js?v=20261003-v3"></script>
+</head>
+<body class="auth-pending">
+<div id="authPanel" class="login-shell"><form class="login-card" id="loginForm">
+  <h1>生产订单管理</h1><p>登录后查看和管理共享订单</p>
+  <label for="loginUsername">账号</label><input id="loginUsername" autocomplete="username" required>
+  <label for="loginPassword">密码</label><input id="loginPassword" type="password" autocomplete="current-password" required>
+  <button class="btn btn-primary" type="submit" id="loginSubmit">登录</button><p id="loginError" role="alert"></p>
+</form></div>
+
+<header class="app-header">
+  <div class="logo">🍡</div>
+  <div class="ht">
+    <h1>生产配料计算系统</h1>
+    <span class="sub">食品厂 · 订单与配比</span>
+  </div>
+</header>
+<div class="account-bar"><span id="accountName"></span><span id="syncStatus" role="status">正在连接</span><button id="syncRetry" class="hidden">重试保存</button><a href="/admin.html" id="adminLink" class="hidden">管理后台</a><button id="changePassword">修改密码</button><button id="logoutButton">退出</button></div>
+<dialog class="password-dialog" id="passwordDialog"><form id="passwordForm"><h2>修改密码</h2><input id="passwordUsername" autocomplete="username" hidden><label for="currentPassword">当前密码</label><input id="currentPassword" type="password" autocomplete="current-password" required><label for="nextPassword">新密码（至少 7 位）</label><input id="nextPassword" type="password" minlength="7" autocomplete="new-password" required><div class="action-bar"><button type="submit" class="btn btn-primary">保存</button><button type="button" id="passwordCancel" class="btn btn-ghost">取消</button></div><p id="passwordError" role="alert"></p></form></dialog>
+
+<!-- ============ 配比计算视图 ============ -->
+<main id="view-calc" class="view hidden">
+  <div class="plan-header">
+    <div class="plan-title">今日生产计划</div>
+    <div class="plan-date" id="todayDate"></div>
+    <div class="plan-summary" id="planSummary"></div>
+  </div>
+  <div id="categoryList"></div>
+  <div class="action-bar">
+    <button class="btn btn-primary" id="btnCalc">🧮 计算今日配料</button>
+    <button class="btn btn-ghost" id="btnClear">清空今日计划</button>
+    <button class="btn btn-ghost" id="btnPrint">🖨 打印配料单</button>
+    <div class="divider"></div>
+    <button class="btn btn-secondary" id="btnRecipe">⚙ 配方管理</button>
+    <button class="btn btn-ghost" id="btnExport">⬇ 导出数据</button>
+    <button class="btn btn-ghost" id="btnImport">⬆ 导入数据</button>
+  </div>
+  <div id="resultArea"></div>
+</main>
+
+<!-- ============ 订单视图 ============ -->
+<main id="view-orders" class="view hidden"></main>
+
+<!-- ============ 覆盖层：新增/编辑订单 ============ -->
+<div id="view-order-edit" class="overlay hidden"></div>
+<!-- ============ 覆盖层：订单详情 ============ -->
+<div id="view-order-detail" class="overlay hidden"></div>
+<!-- ============ 覆盖层：价格设置 ============ -->
+<div id="view-price" class="overlay hidden"></div>
+<!-- ============ 覆盖层：生产汇总 ============ -->
+<div id="view-production" class="overlay hidden"></div>
+<!-- ============ 覆盖层：配方管理 ============ -->
+<div id="view-recipe" class="hidden">
+  <div class="recipe-top"><button class="recipe-back" id="recipeBack">← 返回</button><h2>配方管理</h2></div>
+  <div class="recipe-body" id="recipeContent"></div>
+</div>
+
+<!-- ============ 日期选择器弹窗 ============ -->
+<div id="modal-datepicker" class="modal-mask hidden"></div>
+
+<!-- 底部导航 -->
+<nav class="bottom-nav">
+  <button class="nav-item" id="navOrders"><span class="nav-ico">📋</span><span>订单</span></button>
+  <button class="nav-item" id="navCalc"><span class="nav-ico">🧮</span><span>配比计算</span></button>
+</nav>
+
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+<div id="printArea"></div>
+
+</body>
+</html>
